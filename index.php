@@ -17,6 +17,7 @@
             $len = 0;
             if (count($broken) % 2 == 1) {
                 $len = 1;
+                
             }
             $icon = "";
             for ($index = 0; $index < count($broken); $index++) {
@@ -26,8 +27,9 @@
                 } else {
                     $icon = iconify($broken[$index]);
                 }
-                if ($index == (count($broken) - 1) && $color != NULL) {
+                if ($index == (count($broken) - 1) && ($color != NULL && $len==1)) {
                     $icon = iconify($broken[$index]);
+                    $color = "black";
                 }
 
                 if ($icon != NULL && $color != NULL) {
