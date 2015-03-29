@@ -6,10 +6,8 @@ I'm still testing for collision issues.
 
 How it works
 ===
-We transform the 1st letter into an icon.
-The second letter gets transformed into a color.
-Each letter has a unique icon and color.
-If the hash is impair, the last letter will be colored in black.
- 
+We transform letters into icons and numbers that come after will get transformed into colors.
+If a letter dosn't have a number after it, it will be colored in black.
+Symbols are displayed as they are. 
 
 Pull requests are welcome.

@@ -8,11 +8,21 @@
             .glyphicon{
                 font-size: 2em;
             }
+            .special{
+                font-size: 2em;
+            }
         </style>
-        <h1>Iconify</h1><p>Turn ugly hashes into beautiful icons</p><p>In this test I tried to take letters and replace them with icons and colors. I'm still testing for collision issues. </p><h1>How it works</h1><p>We transform the 1st letter into an icon. The second letter gets transformed into a color. Each letter has a unique icon and color. If the hash is impair, the last letter will be colored in black.</p><p>Pull requests are welcome.</p>
+        <h1>Iconify</h1><p>Turn ugly hashes into beautiful icons</p><br>
+        <p>Pull requests are welcome.</p>
         <hr>
 
         <h2>TEST : </h2>
+        You can test with these hashes: <br>
+        df226c2c6dcb1d995c0299a33a084b201544293c31fc3d279530121d36bbcea9 <br>
+        d89c92b4400b15c39e462a8caa939ab40c3aeeea:1234 <br>
+        $racf$*USER*FC2577C6EBE6265B<br>
+
+
 
         <form action="index.php" method="get">
             <input type="text" name="msg">
@@ -29,19 +39,30 @@
                 $len = 1;
             }
             $icon = "";
+            $color = "";
             $pace = 0;
             for ($index = 0; $index < count($broken); $index++) {
 
-                if ($index % 2 == 0) {
+                if (is_numeric($broken[$index])) {
                     $color = colorify($broken[$index]);
+                    if ($index == count($broken) - 1) {
+                        $icon = "glyphicon-stop";
+                    }
                 } else {
+
+                    if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $broken[$index])) {
+                        echo ("<span class='special'>" . $broken[$index] . "</span>");
+                    }
+
                     $icon = iconify($broken[$index]);
-                }
-                if ($index == (count($broken) - 1) && ($color != NULL && $len == 1)) {
-                    $icon = iconify($broken[$index]);
-                    $color = "black";
                 }
 
+
+                if (isset($icon) && $icon != NULL) {
+                    if ($color == NULL) {
+                        $color = "black";
+                    }
+                }
                 if ($icon != NULL && $color != NULL) {
                     echo '<span style="color:' . $color . '" class="glyphicon ' . $icon . '"></span>';
                     $color = NULL;
@@ -139,26 +160,6 @@ function iconify($char) {
             return "glyphicon-wrench";
         case 'Z':
             return "glyphicon-user";
-        case '0':
-            return "glyphicon-apple";
-        case '1':
-            return "glyphicon-baby-formula";
-        case '2':
-            return "glyphicon-cd";
-        case '3':
-            return "glyphicon-leaf";
-        case '4':
-            return "glyphicon-book";
-        case '5':
-            return "glyphicon-film";
-        case '6':
-            return "glyphicon-print";
-        case '7':
-            return "glyphicon-scale";
-        case '8':
-            return "glyphicon-briefcase";
-        case '9':
-            return "glyphicon-thumbs-up";
     }
 }
 
@@ -167,84 +168,32 @@ function colorify($char) {
     if (strlen($char) != 1) {
         return -1;
     }
-    if (!ctype_alpha($char)) {
+    if (!is_numeric($char)) {
         return -1;
     }
     $upper = strtoupper($char);
 
     switch ($upper) {
-        case 'A':
-            return "#ff7300";
-        case 'B':
-            return "#ff4d00";
-        case 'C':
-            return "#873d00";
-        case 'D':
-            return "#87715f";
-        case 'E':
-            return "#ff0000";
-        case 'F':
-            return "#ffe0b3";
-        case 'G':
-            return "#876500";
-        case 'H':
-            return "#f2ff00";
-        case 'I':
-            return "#f200ff";
-        case 'J':
-            return "#448700";
-        case 'K':
-            return "#c2ffb2";
-        case 'L':
-            return "#00ff1a";
-        case 'M':
-            return "#00ffb2";
-        case 'N':
-            return "#00875f";
-        case 'O':
-            return "#b2fff4";
-        case 'P':
-            return "#008787";
-        case 'Q':
-            return "#00d9ff";
-        case 'R':
-            return "#00b3ff";
-        case 'S':
-            return "#008cff";
-        case 'T':
-            return "#5f7587";
-        case 'U':
-            return "#003687";
-        case 'V':
-            return "#b3d1ff";
-        case 'W':
-            return "#070087";
-        case 'X':
-            return "#b6b3ff";
-        case 'Y':
-            return "#735f87";
-        case 'Z':
-            return "#a600ff";
         case '0':
-            return "glyphicon-apple";
+            return "#ff0000";
         case '1':
-            return "glyphicon-baby-formula";
+            return "#ff9100";
         case '2':
-            return "glyphicon-cd";
+            return "#ddff00";
         case '3':
-            return "glyphicon-leaf";
+            return "#4cff00";
         case '4':
-            return "glyphicon-book";
+            return "#00ffd4";
         case '5':
-            return "glyphicon-film";
+            return "#0099ff";
         case '6':
-            return "glyphicon-print";
+            return "#0008ff";
         case '7':
-            return "glyphicon-scale";
+            return "#ff00e5";
         case '8':
-            return "glyphicon-briefcase";
+            return "#ff0055";
         case '9':
-            return "glyphicon-thumbs-up";
+            return "#448700";
     }
 }
 ?>
