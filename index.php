@@ -40,11 +40,17 @@
             }
             $icon = "";
             $color = "";
-            $pace = 0;
+            $col = 0;
             for ($index = 0; $index < count($broken); $index++) {
 
                 if (is_numeric($broken[$index])) {
                     $color = colorify($broken[$index]);
+                    $col++;
+                    if ($col == 2) {
+                        $icon = "glyphicon-stop";
+                        $col = 0;
+                    }
+
                     if ($index == count($broken) - 1) {
                         $icon = "glyphicon-stop";
                     }
@@ -57,12 +63,12 @@
                     $icon = iconify($broken[$index]);
                 }
 
-
                 if (isset($icon) && $icon != NULL) {
                     if ($color == NULL) {
                         $color = "black";
                     }
                 }
+
                 if ($icon != NULL && $color != NULL) {
                     echo '<span style="color:' . $color . '" class="glyphicon ' . $icon . '"></span>';
                     $color = NULL;
