@@ -32,6 +32,7 @@
         <?php
         if (isset($_GET['msg']) && $_GET['msg'] != "") {
             $msg = $_GET['msg'];
+            $msg = crc32 ( $msg ) #lol i can't PHP
             $broken = str_split($msg);
             $i = 0;
             $len = 0;
