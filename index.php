@@ -32,7 +32,11 @@
         <?php
         if (isset($_GET['msg']) && $_GET['msg'] != "") {
             $msg = $_GET['msg'];
-            $broken = str_split($msg);
+            //$broken = str_split($msg);
+
+            $broken = sha1($msg);
+            $broken = str_split($broken);
+            
             $i = 0;
             $len = 0;
             if (count($broken) % 2 == 1) {
@@ -41,6 +45,8 @@
             $icon = "";
             $color = "";
             $col = 0;
+
+
             for ($index = 0; $index < count($broken); $index++) {
 
                 if (is_numeric($broken[$index])) {
