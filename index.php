@@ -2,6 +2,13 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+
+        <script>
+            function putInField(hash) {
+                var input = document.getElementById("msg");
+                input.value = hash.innerHTML;
+            }
+        </script>
     </head>
     <body style="padding-left: 30px;">
         <style>
@@ -17,12 +24,12 @@
         <hr>
         <h2>TEST : </h2>
         You can test with these hashes: <br>
-        $racf$*USER*FC2577C6EBE6265B<br>
-        df226c2c6dcb1d995c0299a33a084b201544293c31fc3d279530121d36bbcea9<br>
-        d89c92b4400b15c39e462a8caa939ab40c3aeeea:1234<br>
+        <a onclick="putInField(this)" class="hash">$racf$*USER*FC2577C6EBE6265B</a><br>
+        <a onclick="putInField(this)" class="hash">df226c2c6dcb1d995c0299a33a084b201544293c31fc3d279530121d36bbcea9</a><br>
+        <a onclick="putInField(this)" class="hash">d89c92b4400b15c39e462a8caa939ab40c3aeeea:1234</a>
 
         <form action="index.php" method="get">
-            <input type="text" name="msg">
+            <input style="width: 400px;" id="msg" type="text" name="msg"><br>
             <button type="submit">Submit</button>
         </form>
         <?php
@@ -31,7 +38,7 @@
 
             require './src/Iconify.php';
             $iconify = new Iconify\Iconify();
-            
+
             $buffer = $iconify->doIt($msg);
 
             echo "<span>IconHash: </span>";
